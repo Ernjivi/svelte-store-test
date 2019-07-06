@@ -1,15 +1,13 @@
 <script>
-  import { time } from './store.js';
-  import { onDestroy } from 'svelte';
+  import { time, elapsed } from './store.js';
 
-  const formatter = new Intl.DateTimeFormat('es', {
-		hour12: true,
-		hour: 'numeric',
-		minute: '2-digit',
-		second: '2-digit'
+  const formater = new Intl.DateTimeFormat('es', {
+    hour12: true,
+    hour: 'numeric',
+    minute: '2-digit',
+    second: '2-digit'
   });
-  
-  onDestroy(time)
+
 </script>
 
 <style>
@@ -18,7 +16,13 @@
   }
 </style>
 
-<h1>{formatter.format($time)}</h1>
+<h1>The time is {formater.format($time)}</h1>
+<p>
+  This page has ben opened for
+  {$elapsed} {$elapsed === 1 ? 'second' : 'seconds'}
+</p>
+
+
 
 
 
