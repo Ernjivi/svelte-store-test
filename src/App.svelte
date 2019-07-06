@@ -1,24 +1,24 @@
-  <script>
-    import { count } from './store.js';
-    import Increment from './Increment.svelte';
-    import Decrement from './Decrement.svelte';
-    import Resetter from './Resetter.svelte';
+<script>
+  import { time } from './store.js';
+  import { onDestroy } from 'svelte';
 
-    let count_value;
+  const formatter = new Intl.DateTimeFormat('es', {
+		hour12: true,
+		hour: 'numeric',
+		minute: '2-digit',
+		second: '2-digit'
+  });
+  
+  onDestroy(time)
+</script>
 
-    const unsubscribe = count.subscribe(value => {
-      count_value = value;
-    })
-  </script>
+<style>
+  h1 {
+    color: purple;
+  }
+</style>
 
-  <style>
-    h1 {
-      color: purple;
-    }
-  </style>
+<h1>{formatter.format($time)}</h1>
 
-  <h1>The count is {count_value}</h1>
-  <Increment />
-  <Decrement />
-  <Resetter />
+
 
